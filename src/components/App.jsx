@@ -17,8 +17,8 @@ class App extends Component {
 
   formSubmitHandler = (data) => {
    const nameExists = this.state.contacts.some(
-      (contact) => contact.name === data.name
-    );
+      (contact) => contact.name.toLowerCase() === data.name.toLowerCase()
+   );
      if (nameExists) {
        alert(data.name + " is already in contacts")
        return;
@@ -42,7 +42,10 @@ class App extends Component {
     }))
   };
 
- render() {
+  render() {
+    const filteredContacts = this.state.contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase()),
+    );
     return (
       <main>
         <section className='phonebook'>
@@ -57,9 +60,8 @@ class App extends Component {
             onFilterInput={this.handleFilterChange}
             filterValue={this.state.filter}
           />
-            <ContactsList
-            contacts={this.state.contacts}
-            filter={this.state.filter}
+          <ContactsList
+            filteredContacts={filteredContacts}
             onDeleteContact={this.handleDelete}
             />
         </section>

@@ -4,13 +4,9 @@ import PropTypes from 'prop-types';
 
 class ContactsList extends Component {
     render() {
-    const { contacts, filter } = this.props;
-    const filteredContacts = contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
       return (
         <ul>
-          {filteredContacts.map((i) => (
+          {this.props.filteredContacts.map((i) => (
             <ContactItem
               key={i.id}
               id={i.id}
@@ -25,7 +21,6 @@ class ContactsList extends Component {
 export default ContactsList;
 
 ContactsList.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  filter: PropTypes.string.isRequired,
+  filteredContacts: PropTypes.array.isRequired,
   onDeleteContact: PropTypes.func.isRequired
 };

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import css from './Form.module.css'
+
 class Form extends Component {
   state = {
     name: '',
@@ -24,10 +27,11 @@ class Form extends Component {
       <form
         action="addContact"
         name="addContact"
+        className={css['contact-form']}
         onSubmit={this.handleSubmit}
       >
-        <label className="phonebook__label">
-          <span className="phonebook__name">Name</span>
+        <label className={css["phonebook__label"]}>
+          <span className={css["phonebook__name"]}>Name</span>
           <input
             className="phonebook__input-name"
             type="text"
@@ -40,10 +44,9 @@ class Form extends Component {
           />
         </label>
 
-        <label className="phonebook__label-name">
-          <span className="phonebook__number">Number</span>
+        <label className={css["phonebook__label"]}>
+          <span className={css["phonebook__name"]}>Number</span>
           <input
-            className="phonebook__input-number"
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -53,9 +56,13 @@ class Form extends Component {
             onChange={this.handleInputChange}
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button className={css["phonebook__button"]} type="submit">Add contact</button>
       </form>
     );
   }
 }
 export default Form;
+
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-import Form from './Form';
-import ContactsList from './ContactsList';
+import Form from './Form/Form';
+import ContactsList from './ContactsList/ContactsList';
 import Filter from './Filter/Filter';
 
 class App extends Component {
@@ -36,9 +36,10 @@ class App extends Component {
     this.setState({ [event.currentTarget.name]: event.currentTarget.value });
   };
 
-  handleDelete = (event) => {
-    console.log(event.currentTarget.parentNode.getAttribute("key"))
-   // this.props.itemToDelete(key);
+  handleDelete = (id) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id)
+    }))
   };
 
  render() {
@@ -59,7 +60,7 @@ class App extends Component {
             <ContactsList
             contacts={this.state.contacts}
             filter={this.state.filter}
-            handleDelete={this.handleDelete}
+            onDeleteContact={this.handleDelete}
             />
         </section>
       </main>

@@ -15,11 +15,10 @@ class App extends Component {
     filter: '',
   };
   componentDidMount() {
-    const contacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contacts);
-    this.setState(({ contacts: parsedContacts }));
-    if (parsedContacts) {
-      this.setState({ contacts: parsedContacts })
+    const parsedContacts = JSON.parse(localStorage.getItem("contacts"));
+    if (parsedContacts.length !== 0) {
+      this.setState({ contacts: parsedContacts }
+     )
     };
 }
 
